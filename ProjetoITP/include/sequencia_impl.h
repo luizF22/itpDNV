@@ -28,7 +28,12 @@ size_t Sequencia<T>::obterTamanho() const {
 template <typename T>
 void Sequencia<T>::adicionar(const T& elemento) {
     if (tamanho >= capacidade) {
-        redimensionar(capacidade * 2);  // Dobra a capacidade
+        redimensionar(capacidade * 2);  // Dobra a capacidade -> complexidade O(n), ao invés de O(n²)
+        /*
+        A complexidade O(n²) aconteceria porque toda vez que a capacidade fosse alterada, ela iria redimensionar e copiar.
+        Se isso fosse feito todas as vezes para n entradas diferentes, executaríamos n*n passos.
+        No estado atual, toda vez que a entrada é excedida, ela é duplicada, reduzindo o número de passos à duplicação.
+        */
     }
     dados[tamanho] = elemento;
     tamanho++;
@@ -51,6 +56,11 @@ T& Sequencia<T>::operator[](size_t indice) {
 
 template <typename T>
 const T& Sequencia<T>::operator[](size_t indice) const {
+    /*
+    T& Retorna uma REFERÊNCIA ao elemento (permite modificação)
+    operator[]: Sobrecarga do operador de índice
+    Lança mensagem de erro
+    */
     if (indice >= tamanho) {
         throw std::out_of_range("Índice fora do intervalo");
     }

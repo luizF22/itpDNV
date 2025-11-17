@@ -57,10 +57,13 @@ int Paleta::obterTamanho() const {
     return static_cast<int>(cores.obterTamanho());
 }
 
-// Obtém uma cor por índice (retorna preto se índice inválido)
+// Obtém uma cor por índice (retorna preto se índice inválido) -> Possui tratamento defensivo / Diferente para sequência
 Cor Paleta::obterCor(int indice) const {
     if (indice < 0 || indice >= obterTamanho()) {
-        return Cor(); // Retorna preto para índice inválido
+        return Cor(); // Retorna preto para índice inválido -> valor seguro 
+        /*
+        Indice inválido pode ser caso de uso válido (buscar cor inexistente) → Comportamento definido
+        */
     }
     return cores[indice];
 }

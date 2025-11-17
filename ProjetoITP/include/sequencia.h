@@ -3,10 +3,12 @@
 
 #include <cstddef>  // Para size_t
 
-template <typename T>
+// Template serve de forma para diferentes componentes
+// O template gera código específico para cada tipo em tempo de compilação, mantendo type safety enquanto permite reuso máximo.
+template <typename T> // T é um placeholder de qualquer tipo, podendo ser qualquer coisa
 class Sequencia {
 private:
-    T* dados;
+    T* dados; // Ponteiro para QUALQUER tipo que substituir T
     size_t capacidade;
     size_t tamanho;
     void redimensionar(size_t nova_capacidade);
@@ -17,7 +19,7 @@ public:
     Sequencia(size_t capacidade_inicial);
     
     // Destrutor
-    ~Sequencia();
+    ~Sequencia(); // Impede vazamento de memória
     
     // Métodos exigidos pelos testes
     size_t obterTamanho() const;
